@@ -1,0 +1,8 @@
+{
+    "name": "routes",
+    "author": "James Pinson",
+    "private": true,
+    "dependencies": {
+        "express": "^4.17.1"
+    }
+}
