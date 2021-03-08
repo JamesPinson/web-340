@@ -55,7 +55,7 @@ app.get("/", function (request, response){
 
 
 app.get("/new", function(request, response){
-    response.render("index", {
+    response.render("new", {
         message: "New Employee Entry Page"
     });
 });
@@ -69,6 +69,8 @@ app.get("/list", function(request, response){
         });
     });
 });
+
+
 
 app.post("/process", function(request,response){
     console.log(request.body.txtName);
@@ -91,6 +93,38 @@ app.post("/process", function(request,response){
  
     });
     response.redirect("/");
+});
+
+app.get("/view/:queryName", function (request, response) {
+
+    var queryName = request.params.queryName;
+
+    Employee.find({'name': queryName}, function(error, employees) {
+
+        if (error) throw error;
+
+        console.log(employees);
+
+        if (employees.length > 0) {
+
+            response.render("view", {
+
+                title: "Employee Record",
+
+                employee: employees
+
+            })
+
+        }
+
+        else {
+
+            response.redirect("/list")
+
+        }
+
+    });
+
 });
 
 
